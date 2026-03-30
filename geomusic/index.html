@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Геомузыка — Казахстан XX века</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════ HEADER ═══════ -->
+<header class="site-header">
+  <div class="header-inner">
+      <div class="header-left" style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+        <div class="theme-switcher" id="themeSwitcher">
+          <button class="theme-btn" data-theme-value="light" title="Светлая тема">☀️</button>
+          <button class="theme-btn active" data-theme-value="dark" title="Тёмная тема">🌙</button>
+          <button class="theme-btn" data-theme-value="color" title="Цветная тема">🎨</button>
+        </div>
+        <div class="logo">
+      <span class="logo-icon">♬</span>
+      <span class="logo-text">ГЕОМУЗЫКА</span>
+      <span class="logo-sub">Казахстан · XIX век</span>
+    </div>
+    <nav class="tabs" id="mainNav">
+      <button class="tab-btn active" data-tab="map">
+        <span class="tab-icon">🗺</span> Карта
+      </button>
+      <button class="tab-btn" data-tab="audio">
+        <span class="tab-icon">🎵</span> Аудио
+      </button>
+      <button class="tab-btn" data-tab="authors">
+        <span class="tab-icon">👤</span> Авторы
+      </button>
+      <button class="tab-btn" data-tab="games">
+        <span class="tab-icon">🎮</span> Мини-игры
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ═══════ MAIN ═══════ -->
+<main>
+
+  <!-- ══ ВКЛАДКА: КАРТА ══ -->
+  <section id="tab-map" class="tab-section active">
+    <div class="map-layout">
+
+      <!-- Карта -->
+      <div class="map-box">
+        <div class="map-title">Нажмите на регион</div>
+        <div id="mapHost" class="map-host">
+          <div class="map-loader"><span class="spin">♬</span> Загрузка карты…</div>
+        </div>
+        <div id="tooltip" class="tooltip"></div>
+      </div>
+
+      <!-- Панель автора -->
+      
+    </div>
+  </section>
+
+  
+      <!-- Всплывающее меню региона -->
+      <div id="floatingPopup" class="floating-popup" aria-hidden="true">
+        <button class="popup-close" id="popupClose" aria-label="Закрыть">&times;</button>
+        <div id="popupBody" class="popup-body"></div>
+      </div>
+
+  <!-- ══ ВКЛАДКА: АУДИО ══ -->
+  <section id="tab-audio" class="tab-section">
+    <div class="page-inner">
+      <div class="page-hero">
+        <h1 class="page-title">Аудиоархив</h1>
+        <p class="page-sub">Произведения композиторов Казахстана XX века</p>
+      </div>
+      <div id="audioGrid" class="audio-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══ ВКЛАДКА: АВТОРЫ ══ -->
+  <section id="tab-authors" class="tab-section">
+    <div class="page-inner">
+      <div class="page-hero">
+        <h1 class="page-title">Композиторы</h1>
+        <p class="page-sub">Все музыкальные деятели, представленные в нашей базе</p>
+      </div>
+      <div class="authors-controls">
+        <input type="search" id="searchInput" class="search-input" placeholder="Поиск по имени…">
+        <select id="regionFilter" class="region-select">
+          <option value="">Все регионы</option>
+        </select>
+      </div>
+      <div id="authorsGrid" class="authors-grid"></div>
+    </div>
+  </section>
+
+    <!-- ══ ВКЛАДКА: МИНИ-ИГРЫ ══ -->
+  <section id="tab-games" class="tab-section">
+    <div class="page-inner">
+      <div class="page-hero" id="gamesMenuHero">
+        <h1 class="page-title">Музыкальные Игры</h1>
+        <p class="page-sub">Проверьте свои знания о композиторах Казахстана</p>
+      </div>
+
+      <!-- Меню выбора игр -->
+      <div class="games-menu" id="gamesMenu">
+        <div class="game-select-card" onclick="startPhotoGame()">
+          <div class="game-select-icon">📸</div>
+          <h3>Угадай по фото</h3>
+          <p>Сможете ли вы узнать великих деятелей в лицо?</p>
+          <button class="play-btn">Играть</button>
+        </div>
+        
+        <div class="game-select-card" onclick="startRegionGame()">
+          <div class="game-select-icon">🗺️</div>
+          <h3>География музыки</h3>
+          <p>Вспомните, из какого региона родом композитор.</p>
+          <button class="play-btn">Играть</button>
+        </div>
+        
+        <div class="game-select-card" onclick="window.startMelodyGame()">
+          <div class="game-select-icon">🎵</div>
+          <h3>Угадай мелодию</h3>
+          <p>Слушайте фрагменты казахских кюев и песен — определите, кому из великих авторов принадлежит мелодия.</p>
+          <button class="play-btn">Играть</button>
+        </div>
+
+        <div class="game-select-card" onclick="window.startPuzzleGame()">
+          <div class="game-select-icon">🧩</div>
+          <h3>Собери портрет</h3>
+          <p>Соберите из фрагментов фотографию казахского композитора. Выбирайте автора, сложность — и начинайте!</p>
+          <button class="play-btn">Играть</button>
+        </div>
+      </div>
+
+      <!-- Контейнер для самой игры (скрыт по умолчанию) -->
+      <div class="game-container" id="activeGameContainer" style="display: none;">
+        <button class="back-map-btn" style="margin-bottom: 20px;" onclick="exitGame()">← К выбору игр</button>
+        
+        <div class="game-header">
+          <h2 id="gameTitle">Название игры</h2>
+          <div class="game-score">Счет: <span id="gameScore">0</span> / <span id="gameTotal">0</span></div>
+        </div>
+
+        <div class="game-body" id="gameBody">
+          <!-- Сюда JS будет вставлять вопросы -->
+        </div>
+
+        <div class="game-result" id="gameResult" style="display: none;">
+          <h3>Игра окончена!</h3>
+          <p>Ваш результат: <span id="finalScore" style="color: var(--gold); font-weight: bold; font-size: 1.5rem;">0</span></p>
+          <button class="play-btn" style="margin-top: 20px;" id="restartGameBtn">Сыграть еще раз</button>
+        </div>
+      </div>
+      <div id="puzzleGameContainer" style="display:none;max-width:860px;margin:0 auto;padding:30px 20px 60px;"></div>
+
+    </div>
+  </section>
+
+
+</main>
+
+<footer class="site-footer">
+  <p>Геомузыка · История музыки Казахстана XIX века</p>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
